@@ -1,0 +1,74 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Descarga Nuestra App de Streaming Premium!</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "slider": "/slider.js",
+                "audio": "/audio.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Descarga Nuestra App de Streaming Premium!</h1>
+        <p class="subtitle">Accede a un mundo de entretenimiento ilimitado:</p>
+        <ul class="features-list">
+            <li>Deportes en vivo ⚽</li>
+            <li>Canales de TV HD 📺</li>
+            <li>Anime & Series Exclusivas ✨</li>
+            <li>Y mucho más...</li>
+        </ul>
+
+
+        <br>
+        
+        <a href="https://www.mediafire.com/file/xpi5glmfjfqzxwh/Golazo.apk/file" class="download-button" id="downloadBtn">
+            Descargar APK para Android
+        </a>
+        <p class="note">Compatible con Android 5.0 o superior. Instalación rápida y segura.</p>
+
+        <div class="channel-logos-section">
+            <h2>Canales Deportivos y de Entretenimiento Disponibles</h2>
+            <div class="channel-logos-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Dazn-logo.png" alt="DAZN">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/LaLiga_logo_2023.svg/2048px-LaLiga_logo_2023.svg.png" alt="LA LIGA">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg" alt="ESPN">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png" alt="F1">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Toros-movistar.png/1185px-Toros-movistar.png" alt="Onetoro">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Logo_RTVE.svg" alt="RTVE">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Pluto_TV_logo_2024.svg" alt="Pluto TV">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Rakuten_TV_2017_logo.png" alt="Rakuten TV">
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/slider.js"></script>
+    <script type="module">
+        import { playSound } from 'audio';
+
+        document.getElementById('downloadBtn').addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            // Check if the sound asset exists before playing
+            fetch('/success.mp3')
+                .then(response => {
+                    if (response.ok) {
+                        playSound('/success.mp3'); // Play sound
+                    } else {
+                        console.warn('Sound file /success.mp3 not found or failed to load.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking sound file:', error);
+                });
+
+            alert('Simulación de descarga: Aquí iría el enlace real del APK.');
+        });
+    </script>
+</body>
+</html>

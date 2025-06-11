@@ -1,0 +1,354 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Use a common modern font */
+    background: url('/fondo.jpg') no-repeat center center fixed; /* Use Ramos image as background */
+    background-size: cover;
+    background-color: #0a0a0a; /* Fallback */
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative; /* Needed for pseudo-element overlay */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)); /* Dark overlay */
+    z-index: 0;
+}
+
+.container {
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a1a99, #2a2a2a99); /* Semi-transparent container background gradient */
+    backdrop-filter: blur(10px); /* Blur background behind container */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    padding: 40px; /* Default padding */
+    border-radius: 15px; /* More rounded corners */
+    max-width: 600px; /* Default max-width for small/medium screens */
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+    border: 1px solid #333; /* Subtle border */
+    position: relative; /* Positioned above background */
+    z-index: 1;
+}
+
+/* Desktop styles: Apply on screens 768px and wider */
+@media (min-width: 768px) {
+    .container {
+        max-width: 900px; /* Wider container for PC */
+        padding: 50px; /* More padding on PC */
+    }
+
+    h1 {
+        font-size: 3em; /* Slightly larger heading on PC */
+    }
+
+    .subtitle {
+        font-size: 1.2em; /* Slightly larger subtitle on PC */
+    }
+
+    .features-list {
+         font-size: 1.2em; /* Slightly larger list items on PC */
+    }
+
+    .app-screenshot-carousel {
+        max-width: 400px; /* Larger carousel on PC */
+        margin: 50px auto; /* More space above/below carousel */
+    }
+
+    .download-button {
+        padding: 20px 40px; /* Slightly larger button padding on PC */
+        font-size: 1.4em; /* Slightly larger button font on PC */
+    }
+
+    .note {
+         font-size: 1.1em; /* Slightly larger note on PC */
+         margin-top: 30px;
+         margin-bottom: 50px; /* More space before new section on PC */
+    }
+
+    .channel-logos-section {
+        margin-top: 50px;
+        padding-top: 40px;
+    }
+
+    .channel-logos-section h2 {
+         font-size: 2em;
+    }
+
+     .channel-logos-container {
+         gap: 30px; /* More space between logos on PC */
+     }
+
+    .channel-logos-container img {
+        max-height: 50px; /* Larger logos on PC */
+    }
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 15px; /* Slightly less space */
+    font-size: 2.5em; /* Default heading size */
+    font-family: 'Oswald', sans-serif; /* Use a bolder font for title */
+    font-weight: 700; /* Bold font */
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+    line-height: 1.2;
+}
+
+.subtitle {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #cccccc;
+    font-size: 1.1em; /* Default subtitle size */
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    color: #e0e0e0;
+    font-size: 1.1em; /* Default features list size */
+    text-align: left;
+    display: inline-block; /* Center the list block */
+}
+
+.features-list li {
+    margin-bottom: 10px;
+    padding-left: 25px; /* Space for potential icon */
+    position: relative;
+}
+
+.app-screenshot-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 300px; /* Default max width for small/medium screens */
+    margin: 30px auto; /* Center the carousel */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    border: 3px solid #ff416c; /* Vibrant border */
+    background-color: #000;
+    aspect-ratio: 9 / 16; /* Typical phone screen aspect ratio */
+}
+
+.slider-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers container */
+    display: block;
+    flex-shrink: 0; /* Prevent images from shrinking */
+    transition: opacity 0.5s ease-in-out;
+    position: absolute; /* Position images on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hide all by default */
+}
+
+.slider-images img.active {
+    opacity: 1; /* Show active image */
+    position: relative; /* Take up space when active */
+}
+
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* Above images */
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+    background-color: #ff416c; /* Active dot color */
+    transform: scale(1.2);
+}
+
+.download-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b); /* Vibrant red/orange gradient */
+    color: white;
+    padding: 18px 35px; /* More padding */
+    text-decoration: none;
+    border-radius: 8px; /* Rounded button */
+    font-size: 1.3em; /* Larger font */
+    font-weight: 700;
+    margin-top: 30px; /* More space above button */
+    transition: all 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.5); /* Shadow matching gradient */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Hide pseudo-element overflow */
+}
+
+.download-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Light swipe effect */
+    transition: left 0.5s ease;
+}
+
+.download-button:hover::before {
+    left: 100%;
+}
+
+.download-button:hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c); /* Reverse gradient on hover */
+    box-shadow: 0 6px 20px rgba(255, 75, 43, 0.7); /* Larger shadow on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.note {
+    margin-top: 25px; /* More space above note */
+    font-size: 1em; /* Default note font size */
+    color: #bbbbbb; /* Lighter grey for note */
+    margin-bottom: 40px; /* Add space before the new section */
+}
+
+.channel-logos-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #333; /* Separator line */
+}
+
+.channel-logos-section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.channel-logos-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow logos to wrap on smaller screens */
+    gap: 20px; /* Space between logos */
+    padding: 0 10px; /* Add padding to prevent logos from touching edges on small screens */
+}
+
+.channel-logos-container img {
+    max-height: 40px; /* Default max height for logos */
+    width: auto; /* Maintain aspect ratio */
+    filter: grayscale(100%) brightness(150%); /* Make logos grayscale and slightly brighter */
+    opacity: 0.8; /* Subtle opacity */
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.channel-logos-container img:hover {
+    filter: grayscale(0%) brightness(100%); /* Color on hover */
+    opacity: 1; /* Full opacity on hover */
+}
+
+/* Optional: Add a subtle glow/border on focus for accessibility */
+.download-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 75, 43, 0.6); /* Glow effect */
+}
+
+/* Existing media query: Adjust for smaller screens (max-width 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px; /* Less padding on small screens */
+    }
+
+    h1 {
+        font-size: 2em; /* Smaller heading on small screens */
+    }
+
+    p, .features-list li {
+        font-size: 1em;
+    }
+
+    .download-button {
+        padding: 15px 25px; /* Less padding on button */
+        font-size: 1.1em;
+    }
+
+    .app-screenshot-carousel {
+        max-width: 250px; /* Smaller on small screens */
+    }
+
+    .note {
+         margin-bottom: 30px;
+    }
+
+     .channel-logos-section {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+
+    .channel-logos-section h2 {
+         font-size: 1.5em;
+    }
+
+    .channel-logos-container {
+         gap: 15px;
+    }
+
+     .channel-logos-container img {
+        max-height: 30px; /* Smaller logos on small screens */
+    }
+}
